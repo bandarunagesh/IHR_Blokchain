@@ -1,0 +1,19 @@
+<h1 mat-dialog-title></h1>
+<div mat-dialog-content>
+    <p *ngIf="data.type=='provider'">Please select Provider</p>
+    <p *ngIf="data.type=='custodian'">Please select Custodian</p>
+    <select *ngIf="data.type=='provider'" class="form-control" [(ngModel)]="selectedDoctor"
+        style="margin-bottom: 20px;">
+        <option>Select Provider</option>
+        <option *ngFor="let pro of data.doctors" [value]="pro">{{pro}}</option>
+    </select>
+    <select *ngIf="data.type=='custodian'" class="form-control" style="margin-bottom: 20px;">
+        <option>Select Custodian</option>
+        <option *ngFor="let pro of data.custodians" value="pro.custodianId">{{pro.custodian}}</option>
+    </select>
+    <!--<input matInput [(ngModel)]="data.animal">-->
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button class="btn btn-primary" (click)="dialogRef.close(selectedDoctor)" cdkFocusInitial>Revoke</button>
+</div>

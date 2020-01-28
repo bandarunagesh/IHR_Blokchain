@@ -1,0 +1,83 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <p>Select Patient: <select style="padding: 10px 20px;
+          color: #999;
+          background: #f9f9f9;
+          border-radius: 2px;
+          margin-left: 15px;
+          font-size: 14px;"
+            (change)="changePatient($event)">
+            <option value="">Select</option>
+            <option *ngFor="let patient of patients" [value]="patient.profile_id">{{patient.patientName}}</option>
+          </select></p>
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title ">Medical Records <input type="button" class="btn btn-info pull-right" value="Write Prescription"
+                (click)="writePrescription()" /></h4>
+            <p class="card-category"> Here you can find the available medical records of selected
+              patient.</p>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>Date</th>
+                  <th>
+                    Diagnosis
+                  </th>
+                  <th>
+                    Diagnosis CD
+                  </th>
+                  <th>
+                    Prescribed Medicine
+                  </th>
+                  <th>
+                    Route
+                  </th>
+                  <th>
+                    Allergies
+                  </th>
+                  <th>
+                    Vitals
+                  </th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let mr of medicalRecords">
+
+                    <td>
+                      {{mr.encounter_time | date: 'MM/dd/yyyy'}}
+                    </td>
+                    <td>
+                      {{mr.Diagnosis}}
+                    </td>
+                    <td>
+                      {{mr.Diagnosis_CD}}
+                    </td>
+                    <td>
+                      {{mr.Prescribed_Medicine}}
+                    </td>
+                    <td>
+                      {{mr.Route}}
+                    </td>
+                    <td>
+                      {{mr.Allergies}}
+                    </td>
+                    <td>
+                      {{mr.Vitals}}
+                    </td>
+
+                    <!-- <td class="text-primary">
+                            $36,738
+                        </td> -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

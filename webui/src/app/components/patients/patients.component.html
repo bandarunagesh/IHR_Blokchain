@@ -1,0 +1,82 @@
+<div class="">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats" [ngClass]="patient == 1 ? 'selected-patinet': ''">
+          <div class="card-header card-header-warning card-header-icon">
+            <div class="card-icon" style="padding:0;">
+              <img class="user-image" src="assets/img/women.png" id="icon" alt="User Icon" />
+            </div>
+            <p class="card-category">{{wife}}</p>
+            <h3 class="card-title">{{wifeAge}}
+              <small>yrs</small>
+            </h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats text-primary" style="cursor: pointer;" (click)="getDetails(1)">
+              <i class="material-icons">visibility</i>
+              <a>Click to View Records</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats" [ngClass]="patient == 2 ? 'selected-patinet': ''">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon" style="padding:0;">
+              <img class="user-image" src="assets/img/girl.png" id="icon" alt="User Icon" />
+            </div>
+            <p class="card-category">{{girl}}</p>
+            <h3 class="card-title">{{girlAge}}
+              <small>yrs</small>
+            </h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats text-primary" style="cursor: pointer;" (click)="getDetails(2)">
+              <i class="material-icons">visibility</i>
+              <a>Click to View Records</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats" [ngClass]="patient == 3 ? 'selected-patinet': ''">
+          <div class="card-header card-header-danger card-header-icon">
+            <div class="card-icon" style="padding:0;">
+              <img class="user-image" src="assets/img/boy.png" id="icon" alt="User Icon" />
+            </div>
+            <p class="card-category">{{boy}}</p>
+            <h3 class="card-title">{{boyAge}}
+              <small>yrs</small>
+            </h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats text-primary" style="cursor: pointer;" (click)="getDetails(3)">
+              <i class="material-icons">visibility</i>
+              <a>Click to View Records</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats" [ngClass]="patient == 4 ? 'selected-patinet': ''">
+          <div class="card-header card-header-info card-header-icon">
+            <div class="card-icon" style="padding:0;">
+              <img class="user-image" [src]="grandImage" id="icon" alt="User Icon" />
+            </div>
+            <p class="card-category">{{grand}}</p>
+            <h3 class="card-title">{{grandAge}}
+              <small>yrs</small>
+            </h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats text-primary" style="cursor: pointer;" (click)="getDetails(4)">
+              <i class="material-icons">visibility</i>
+              <a>Click to View Records</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

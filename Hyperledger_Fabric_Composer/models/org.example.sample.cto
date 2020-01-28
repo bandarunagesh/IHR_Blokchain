@@ -1,0 +1,141 @@
+//Define the Namespace to setup blockchain project
+namespace org.example.sample
+
+//Use this for the Registration Process, once user created sucessfully it will publish the PatientID to blockchain and create an patient asseet
+asset Patient identified by PatientId {
+    o String PatientId
+    o String[] authorized
+}
+
+//User can update his profile information like demographics and personal data once after first login, we use this to update the details to blockchain
+asset Patient_profile  identified by profile_id{
+    o String profile_id
+    --> Patient Patient
+    o String patientName
+    o String gender
+    o String age
+    o String dob
+    o String Marital_Status
+    o String blood_Group
+    o String Occupation
+    o String Home_Phone
+    o String Work_Phone
+    o String Email_Address
+    o Address address
+    o String[] Insurance_Provider
+}
+
+//Used to create doctor registration process
+participant Doctor identified by DoctorId {
+    o String DoctorId
+}
+
+//Doctor can update his profile once after registration
+asset Doctor_profile identified by profile_id{
+    o String profile_id
+     --> Doctor Doctor
+    o String providerName
+    o String Tax_ID
+    o String Provider_Type
+    o String EmailAddress
+    o String Provider_Contact
+    o Address address
+}   
+
+
+//Mappings between the Dependents and independents are controlled though this.
+asset Dependent_Mappints identified by iKey{
+o String iKey
+o String independent_profile_id
+o String dependent_profile_id
+}
+
+//This asset is heart to the blockchain, it keeps tracks of all the medical records of the patient
+asset Medical_Record identified by record_id{
+	  o String record_id
+    o String PatientId
+    o String DoctorId
+    o Integer version
+    o String[] authorized
+    o String Diagnosis_CD
+    o String Diagnosis
+    o DateTime encounter_time
+    o String Route
+    o String Prescribed_Medicine
+    o String Allergies
+    o String Vitals
+    
+}
+//To Created date and time
+asset Encounter identified by encounter_id{
+    o String encounter_id
+    
+    //time
+    // sub-encounter
+    // location
+}
+
+//This smart contract is written to store the EHR(Electronic Medical Records)
+transaction UpdateRecord {
+    o String record_id
+    o String PatientId
+    o String DoctorId
+    o Integer version
+    o String[] authorized
+    o String Diagnosis_CD
+    o String Diagnosis
+    o DateTime encounter_time
+    o String Route
+    o String Prescribed_Medicine
+    o String Allergies
+    o String Vitals
+}
+//This smart contract is created to control the medical record access
+transaction AllowOtherDoctorsRead{
+  	o String id
+    -->	Medical_Record record
+    -->	Doctor doctor2
+}
+
+//This smart contract is created to allow provider to write any prescriptions to patient and store in his wallet
+transaction AllowAdoctorWrite{
+	--> Patient patient
+    o String DoctorId
+}
+
+//This smart contract is used to revoke the access of doctor on patient medical records
+transaction RevokeDoctorAccess{
+	--> Patient patient
+    o String DoctorId
+}
+
+//this smart contract is used to revoke the write access of a doctor so he can no longer write any prescriptions to patient.
+transaction revokedoctorWrite{
+  	o String id
+    -->	Medical_Record record
+    -->	Doctor doctor2
+}
+
+//This smart contract is to handle the permission among patient and care taker
+transaction appointCaretaker{
+  	-->	Patient patient
+    -->	Medical_Record record
+    o String cartaker
+
+}
+
+//This smart contract is to revoke the patient access
+transaction revokeCaretaker{
+  	-->	Patient patient
+    -->	Medical_Record record
+    o String cartaker
+}
+
+//This is an Concept created to maintain the address proprity and can be used accross the CTO file
+concept Address {
+  o String number
+  o String street
+  o String city
+  o String country
+  o String PinCode
+}

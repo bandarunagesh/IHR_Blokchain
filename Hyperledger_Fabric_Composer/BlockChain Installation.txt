@@ -1,0 +1,38 @@
+Prerequisites: Make sure the fabric is running by executing the below commands
+	docker ps
+	
+Step One: Creating a business network structure
+	yo hyperledger-composer:businessnetwork
+	Enter BlockHackers for the network name, and desired information for description, author name, and author email.
+	Select Apache-2.0 as the license.
+	Select org.example.sample as the namespace.
+	Select No when asked whether to generate an empty network or not
+
+Step Two: Defining a business network
+	Create the org.example.sample.cto model file.
+	Create JavaScript transaction logic in the file logic.js.
+	Adding access control in the file permissions.acl.
+	Create the query file using queries.qry
+
+Step Three: Generate a business network archive
+	Now that the business network has been defined, it must be packaged into a deployable business network archive (.bna) file.
+	Commands: composer archive create -t dir -n .
+	
+Step Four: Deploying the business network
+	After creating the .bna file, the business network can be deployed to the instance of Hyperledger Fabric.
+	Commands: 
+		composer network install --card PeerAdmin@hlfv1 --archiveFile blockhackers@0.0.7.bna
+		composer network start --networkName blockhackers --networkVersion 0.0.7 --networkAdmin admin --networkAdminEnrollSecret adminpw --card PeerAdmin@hlfv1 --file networkadmin.card
+		composer card import --file networkadmin.card
+		composer network ping --card admin@blockhackers
+	
+Step Five: Generating a REST server
+	Hyperledger Composer can generate a bespoke REST API based on a business network. For developing a web application, the REST API provides a useful layer of language-neutral abstraction.
+	Commands: nohup composer-rest-server -c admin@blockhackers -n never -w true -p 3001 > rest-server.out 2> rest-server.err < /dev/null &
+	Rest server can be accessed using http://localhost:3001/explorer/
+
+Key Files
+queries.qry
+permissions.acl
+logic.js
+org.example.sample.cto

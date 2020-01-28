@@ -1,0 +1,74 @@
+/**
+ * Used to run queires accross blockchain network and get the required data. this is using accross the application to accelarate the application development and maintain high level abstracts
+ */
+query selectPatients {
+  description: "Select all Patients"
+  statement:
+      SELECT org.example.sample.Patient_profile
+}
+
+query selectPatientById {
+  description: "Select the patient based on their id"
+  statement:
+      SELECT org.example.sample.Patient
+          WHERE (PatientId ==_$PatientId)
+}
+
+query selectDoctors {
+   description: "Select all doctors"
+  statement:
+      SELECT org.example.sample.Doctor_profile
+} 
+
+query selectDoctorById {
+   description: "Select the doctor based on their id"
+  statement:
+      SELECT org.example.sample.Doctor
+          WHERE (DoctorId ==_$DoctorId)
+}
+
+query selectMedicalRecordByDoctorId {
+   description: "Select the medical records based on the DoctorId"
+  statement:
+      SELECT org.example.sample.Medical_Record
+          WHERE ((authorized CONTAINS _$DoctorId ))
+} 
+
+query selectMedicalRecordByPatientId {
+   description: "Select the medical records based on the PatientId"
+  statement:
+      SELECT org.example.sample.Medical_Record
+          WHERE ((PatientId ==_$PatientId ))
+} 
+
+
+query selectMedicalRecordByDoctorAndPatientId {
+   description: "Select the medical records based on the DoctorId and PatientId"
+  statement:
+      SELECT org.example.sample.Medical_Record
+          WHERE ((authorized CONTAINS _$DoctorId ) AND PatientId == _$PatientId)
+}
+
+
+query selectMedicalRecordByDoctorAndPatientIdAndTime {
+   description: "Select the medical records based on the DoctorId and PatientId sorted by time"
+  statement:
+      SELECT org.example.sample.Medical_Record
+          WHERE (DoctorId ==_$DoctorId AND PatientId == _$PatientId) ORDER BY encounter_time
+} 
+
+
+query selectMedicalRecordByCartaker {
+   description: "Select the medical records based on the PatientId"
+  statement:
+      SELECT org.example.sample.Medical_Record
+          WHERE (authorized CONTAINS  _$caregiverID)
+}
+
+
+query select_AllMedicalRecords {
+   description: "Select all the medical records"
+  statement:
+      SELECT org.example.sample.Medical_Record
+          }
+
